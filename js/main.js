@@ -5,37 +5,6 @@ $(document).ready(initPage);
 // document.querySelector('.guest-email').addEventListener('focusout', function () {
 //     document.querySelector('.guest-name').checkValidity();
 // });
-const MYEMAIL = 'martinshn@gmail.com';
-const DATA = [
-    [
-        'book-shop',
-        'A book shop',
-        'Books index with admin and user managment',
-        "A login page checks your's role, entitles you different permissions in the site. A use of modals and getter/setter functions to add/update the books, with full attention to CRUDL",
-        ['e-commerce', 'CRUDL', 'modal', 'security'],
-    ],
-    [
-        'guess-me',
-        'Guess Me Game',
-        'Can you guess who am i?',
-        'A vast use of bootstrap and jquery - brings a great game with self learning abilities',
-        ['bootstrap', 'jquery'],
-    ],
-    [
-        'mine-sweeper',
-        'Mine Sweeper',
-        'A fork for the nostalgic game',
-        'Use of recursive function to reveal the empty fields, with lots of new features to the loved game',
-        ['recursive', 'local storage'],
-    ],
-    [
-        'pacman',
-        'PacMan',
-        'Hungry for some crumbs?',
-        'The nostalgic game with some new added features',
-        ['audio'],
-    ],
-];
 
 var gProjs = [];
 
@@ -44,31 +13,37 @@ function initPage() {
     renderProjs();
     renderModals();
     $('.email-btn').on('click', function () {
+        var isValid = true;
+        $('.guest-name').removeClass('is-invalid');
+        $('.guest-email').removeClass('is-invalid');
         var guestName = $('.guest-name').val();
         var guestEmail = $('.guest-email').val();
-        var guestMsg = $('.guest-msg').val();
-        window.location.assign(
-            `https://mail.google.com/mail/?view=cm&fs=1&to=${MYEMAIL}&su=New-Portfoli-Submit&body=Guest-name:${guestName}>>Guest-Email:${guestEmail}>>MSG:${guestMsg}`
-        );
+        var regex =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!guestName.trim()) {
+            $('.guest-name').addClass('is-invalid');
+            isValid = false;
+        }
+        if (!regex.test(guestEmail)) {
+            $('.guest-email').addClass('is-invalid');
+            isValid = false;
+        }
+
+        if (isValid) {
+            var guestMsg = $('.guest-msg').val();
+            window.open(
+                `https://mail.google.com/mail/?view=cm&fs=1&to=${getMyEmail()}&su=New Portfoli Submit&body=Guest-name: ${guestName}%0A%0AGuest-Email: ${guestEmail}%0A%0AMSG:%0A${guestMsg.replaceAll(
+                    '\n',
+                    '%0A'
+                )}`,
+                '_blank'
+            );
+        }
     });
     $('.void-link').click(function (ev) {
         openCanvas();
         ev.preventDefault();
         ev.stopPropagation();
-    });
-}
-
-function createProjs() {
-    gProjs = DATA.map(function (proj) {
-        return {
-            id: proj[0],
-            name: proj[1],
-            title: proj[2],
-            desc: proj[3],
-            url: `projs/${proj.id}`,
-            publishedAt: Date.now(),
-            labels: proj[4],
-        };
     });
 }
 
