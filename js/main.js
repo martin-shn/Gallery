@@ -27,7 +27,6 @@ function initPage() {
         if (!regex.test(guestEmail)) {
             $('.guest-email').addClass('is-invalid');
             isValid = false;
-            //test
         }
 
         if (isValid) {
