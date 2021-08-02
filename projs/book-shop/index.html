@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,100&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/main.css" />
+        <title>Safe-content</title>
+    </head>
+
+    <body onload="init()">
+        <div class="login">
+            <h2>Log in</h2>
+            <label>Username</label>
+            <input
+                placeholder="Enter Username"
+                type="text"
+                name="username"
+                autofocus
+                autocomplete="off"
+            />
+
+            <label>Password</label>
+            <input
+                placeholder="Enter Password"
+                type="password"
+                name="password"
+                onkeypress="checkEnter(event)"
+            />
+            <h4 class="login-msg">Wrong login!</h4>
+            <button class="login-btn" onclick="login()" type="submit" tabindex="0">Login</button>
+        </div>
+        <script src="js/storage-service.js"></script>
+        <script src="js/user.service.js"></script>
+        <script src="js/user.controller.js"></script>
+    </body>
+</html>
