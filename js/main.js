@@ -140,3 +140,17 @@ function renderModals() {
         .join('');
     $('.my-modals').html(strHtml);
 }
+
+function changeTheme(theme) {
+    switch (theme) {
+        case 'light':
+            $('body').addClass('light');
+            $('body').removeClass('dark');
+            break;
+        case 'dark':
+            $('body').addClass('dark');
+            $('body').removeClass('light');
+
+            break;
+    }
+}

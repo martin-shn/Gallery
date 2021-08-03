@@ -20,6 +20,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 
         <!-- Custom styles for this template -->
+        <link href="css/ca-gallery-dark.css" rel="stylesheet" />
         <link href="css/ca-gallery.css" rel="stylesheet" />
     </head>
 
@@ -74,6 +75,13 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger void-link" href="#">Contact</a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" id="theme" href="#">Theme<b class="caret"></b></a>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="theme">
+                                <li class="nav-item"><a class="dropdown-item nav-link" href="#" onclick="changeTheme('light')">LIGHT</a></li>
+                                <li class="nav-item"><a class="dropdown-item nav-link bg-dark" href="#" onclick="changeTheme('dark')">DARK</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
