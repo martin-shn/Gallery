@@ -18,8 +18,7 @@ function initPage() {
         $('.guest-email').removeClass('is-invalid');
         var guestName = $('.guest-name').val();
         var guestEmail = $('.guest-email').val();
-        var regex =
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!guestName.trim()) {
             $('.guest-name').addClass('is-invalid');
             isValid = false;
@@ -32,10 +31,10 @@ function initPage() {
         if (isValid) {
             var guestMsg = $('.guest-msg').val();
             window.open(
-                `https://mail.google.com/mail/?view=cm&fs=1&to=${getMyEmail()}&su=New Portfoli Submit&body=Guest-name: ${guestName}%0A%0AGuest-Email: ${guestEmail}%0A%0AMSG:%0A${guestMsg.replaceAll(
-                    '\n',
-                    '%0A'
-                )}`,
+                `https://mail.google.com/mail/?view=cm&fs=1
+                &to=${getMyEmail()}
+                &su=New Portfoli Submit
+                &body=Guest-name: ${guestName}%0A%0AGuest-Email: ${guestEmail}%0A%0AMSG:%0A${guestMsg.replaceAll('\n', '%0A')}`,
                 '_blank'
             );
         }
@@ -56,21 +55,21 @@ function renderProjs() {
                     return `<span class="badge bg-warning">${label}</span>`;
                 })
                 .join(' ');
-            return `<div class="col-md-4 col-sm-6 portfolio-item">
-<a class="portfolio-link" data-toggle="modal" href="#portfolioModal${idx}">
-<div class="portfolio-hover">
-<div class="portfolio-hover-content">
-<i class="fa fa-plus fa-3x"></i>
-</div>
-</div>
-<img class="img-fluid" src="img/portfolio/${proj.id}.jpg" alt="" />
-</a>
-<div class="portfolio-caption">
-<h4>${proj.name}</h4>
-<p class="text-muted">${proj.title}</p>
-${badgesStr}
-</div>
-</div>`;
+            return `<div class="col-md-4 col-sm-6 portfolio-item" style="text-align: center;">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal${idx}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="img/portfolio/${proj.id}.jpg" style="height: 155px; object-fit: cover;" alt="" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>${proj.name}</h4>
+                            <p class="text-muted">${proj.title}</p>
+                            ${badgesStr}
+                        </div>
+                    </div>`;
         })
         .join('');
 
@@ -97,21 +96,31 @@ function renderModals() {
                                                 <p class="item-intro text-muted">
                                                     ${proj.title}
                                                 </p>
+                                                <a href="projs/${proj.id}/index.html" target="_blank">
                                                 <img
                                                     class="img-fluid d-block mx-auto"
                                                     src="img/portfolio/${proj.id}.jpg"
                                                     alt=""
                                                 />
+                                                </a>
                                                 <p>
                                                     ${proj.desc}
                                                 </p>
                                                 <ul class="list-inline">
-                                                    <li>Date: ${new Date(
-                                                        proj.publishedAt
-                                                    ).toLocaleString('gb')}</li>
+                                                    <li>Date: ${new Date(proj.publishedAt).toLocaleDateString('en-GB')}</li>
                                                     <li>Client: Window</li>
                                                     <li>Category: Photography</li>
                                                 </ul>
+                                                <button
+                                                    class="btn btn-secondary"
+                                                    type="button" 
+                                                    onclick="window.open('projs/${proj.id}/index.html','_blank')"
+                                                >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                                                <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                              </svg>
+                                                    RUN THIS PROJECT
+                                                </button>
                                                 <button
                                                     class="btn btn-primary"
                                                     data-dismiss="modal"
